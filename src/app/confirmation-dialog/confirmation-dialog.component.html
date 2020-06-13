@@ -1,0 +1,9 @@
+<mat-dialog-content>
+  <h3>
+    Are you sure you want to delete <strong>{{data.bookmark.name}}</strong> bookmark?
+  </h3>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="warn" (click)="onDeleteConfirm()">Delete</button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

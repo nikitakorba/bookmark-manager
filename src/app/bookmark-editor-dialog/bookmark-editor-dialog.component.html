@@ -1,0 +1,55 @@
+<h1 mat-dialog-title>Bookmark</h1>
+
+<mat-dialog-content [formGroup]="bookmarkForm">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      formControlName="name"
+      placeholder="Name"
+      required
+    />
+    <mat-error *ngIf="bookmarkForm.get('name').hasError('required')">
+      Name is required.
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>URL</mat-label>
+    <input
+      matInput
+      formControlName="URL"
+      placeholder="URL"
+      type="url"
+      required
+    />
+    <mat-error *ngIf="bookmarkForm.get('URL').hasError('required')">
+      URL is required.
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Group</mat-label>
+      <input type="text"
+             placeholder="Group"
+             matInput
+             formControlName="group"
+             placeholder="Group"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let group of groups" [value]="group">
+          {{group}}
+        </mat-option>
+      </mat-autocomplete>
+    <mat-error *ngIf="bookmarkForm.get('group').hasError('required')">
+      Group is required.
+    </mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary"
+          (click)="onSave()"
+          [disabled]="bookmarkForm.invalid">
+    Save
+  </button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

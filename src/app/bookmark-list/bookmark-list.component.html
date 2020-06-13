@@ -1,0 +1,30 @@
+<div class="bookmark-list">
+  <mat-card class="bookmark-list__container">
+    <mat-card-actions align="end">
+      <button mat-mini-fab color="primary" matTooltip="Add New Bookmark">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-card-actions>
+    <mat-card-content>
+      <mat-selection-list [multiple]="false">
+        <mat-list-option *ngFor="let bookmark of bookmarks" (dblclick)="navigateToURL(true, bookmark)">
+          <div>
+            <span>
+              {{ bookmark.name }}
+            </span>
+            <button mat-icon-button #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="navigateToURL(true, bookmark)">Open in New Tab</button>
+            <button mat-menu-item (click)="navigateToURL(false, bookmark)">Open in Current Tab</button>
+            <button mat-menu-item (click)="editBookmark(bookmark)">Edit Bookmark</button>
+            <button mat-menu-item (click)="deleteBookmark(bookmark)">Delete Bookmark</button>
+          </mat-menu>
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-card-content>
+  </mat-card>
+</div>
+
