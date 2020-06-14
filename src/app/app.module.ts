@@ -25,6 +25,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { BookmarkListContainerComponent } from "./containers/bookmark-list-container/bookmark-list-container.component";
 import { StoreModule } from '@ngrx/store';
 import { INITIAL_APPLICATION_STATE, REDUCERS } from "./app.state";
+import { storageMetaReducer } from "./state/storage-meta-reducer";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { INITIAL_APPLICATION_STATE, REDUCERS } from "./app.state";
     MatInputModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    StoreModule.forRoot(REDUCERS, {initialState: INITIAL_APPLICATION_STATE}),
+    StoreModule.forRoot(REDUCERS, {initialState: INITIAL_APPLICATION_STATE, metaReducers: [storageMetaReducer]}),
   ],
   providers: [],
   bootstrap: [AppComponent],
