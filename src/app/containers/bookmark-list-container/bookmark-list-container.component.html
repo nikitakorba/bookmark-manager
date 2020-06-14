@@ -14,7 +14,7 @@
   <mat-sidenav #sidenav [opened]="true" mode="side">
     <mat-selection-list [multiple]="false" (selectionChange)="onGroupSelect($event)">
       <mat-list-option value="All" [selected]="true">All</mat-list-option>
-      <mat-list-option *ngFor="let group of groups" [value]="group">
+      <mat-list-option *ngFor="let group of groups$ | async" [value]="group">
        <span class="no-wrap" [title]="group">
          {{group}}
        </span>

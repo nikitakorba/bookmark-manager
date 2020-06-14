@@ -35,7 +35,7 @@
            placeholder="Group"
            [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let group of groups" [value]="group">
+      <mat-option *ngFor="let group of groups$ | async" [value]="group">
         {{group}}
       </mat-option>
     </mat-autocomplete>

@@ -24,6 +24,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { BookmarkListContainerComponent } from "./containers/bookmark-list-container/bookmark-list-container.component";
 import { StoreModule } from '@ngrx/store';
+import { INITIAL_APPLICATION_STATE, REDUCERS } from "./app.state";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { StoreModule } from '@ngrx/store';
     MatInputModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(REDUCERS, {initialState: INITIAL_APPLICATION_STATE}),
   ],
   providers: [],
   bootstrap: [AppComponent],

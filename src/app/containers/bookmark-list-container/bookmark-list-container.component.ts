@@ -6,6 +6,10 @@ import { BookmarkEditorDialogComponent } from "../../components/bookmark-editor-
 import { take, takeUntil } from "rxjs/operators";
 import { ConfirmationDialogComponent } from "../../components/confirmation-dialog/confirmation-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
+import { Store } from "@ngrx/store";
+import { ApplicationState } from "../../interfaces/application-state.interface";
+import { ALL_GROUP_NAME, selectBookmarks, selectBookmarksGroups } from "../../app.state";
+import { CreateBookmark, DeleteBookmark, EditBookmark } from "../../state";
 
 @Component({
   selector: 'app-bookmark-list-container',
@@ -15,30 +19,22 @@ import { MatDialog } from "@angular/material/dialog";
 })
 
 export class BookmarkListContainerComponent implements OnInit, OnDestroy {
-  public groups: string[] = ['Work', 'Personal', 'Leisure'];
-  public bookmarks$: Observable<Bookmark[]> = of([
-    {
-      name: 'Youtube',
-      URL: 'www.youtube.com',
-      group: 'Work',
-    },
-    {
-      name: 'Google',
-      URL: 'www.google.com',
-      group: 'Work',
-    }
-  ]);
-  public selectedGroup: string = 'All';
+  public groups$: Observable<string[]>;
+  public bookmarks$: Observable<Bookmark[]>;
+  public selectedGroup: string = ALL_GROUP_NAME;
   private onDestroySubject: Subject<void> = new Subject<void>();
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private store: Store<ApplicationState>) {
   }
 
   ngOnInit() {
+    this.groups$ = this.store.select(selectBookmarksGroups);
+    this.bookmarks$ = this.store.select(selectBookmarks());
   }
 
   onGroupSelect({option}: MatSelectionListChange) {
     this.selectedGroup = option.value;
+    this.bookmarks$ = this.store.select(selectBookmarks(this.selectedGroup));
   }
 
   onBookmarkEdit(bookmark: Bookmark) {
@@ -52,7 +48,7 @@ export class BookmarkListContainerComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroySubject)
     ).subscribe((editedBookmark: Bookmark) => {
       if (editedBookmark) {
-        console.log(editedBookmark);
+        this.store.dispatch(new EditBookmark(editedBookmark));
       }
     });
   }
@@ -68,7 +64,7 @@ export class BookmarkListContainerComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroySubject)
     ).subscribe((confirmed: boolean) => {
       if (confirmed) {
-        console.log(confirmed);
+        this.store.dispatch(new DeleteBookmark(bookmark));
       }
     });
   }
@@ -80,7 +76,7 @@ export class BookmarkListContainerComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroySubject)
     ).subscribe((bookmark: Bookmark) => {
       if (bookmark) {
-        console.log(bookmark);
+        this.store.dispatch(new CreateBookmark(bookmark));
       }
     });
   }
