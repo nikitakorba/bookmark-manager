@@ -23,6 +23,7 @@ import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { BookmarkListContainerComponent } from "./containers/bookmark-list-container/bookmark-list-container.component";
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { BookmarkListContainerComponent } from "./containers/bookmark-list-conta
     MatInputModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
