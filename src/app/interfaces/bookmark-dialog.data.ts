@@ -1,4 +1,4 @@
-import {Bookmark} from "./bookmark.interface";
+import { Bookmark } from "./bookmark.interface";
 
 export interface BookmarkDialogData {
   bookmark?: Bookmark;

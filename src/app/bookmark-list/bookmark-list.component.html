@@ -1,18 +1,36 @@
 <div class="bookmark-list">
   <mat-card class="bookmark-list__container">
+    <mat-card-title>
+      {{selectedGroup}} Bookmarks
+    </mat-card-title>
     <mat-card-actions align="end">
-      <button mat-mini-fab color="primary" matTooltip="Add New Bookmark">
+      <button mat-mini-fab color="primary"
+              matTooltip="Add New Bookmark"
+              (click)="createBookmark()"
+      >
         <mat-icon>add</mat-icon>
       </button>
     </mat-card-actions>
     <mat-card-content>
-      <mat-selection-list [multiple]="false">
-        <mat-list-option *ngFor="let bookmark of bookmarks" (dblclick)="navigateToURL(true, bookmark)">
-          <div>
-            <span>
-              {{ bookmark.name }}
-            </span>
-            <button mat-icon-button #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menu">
+      <mat-selection-list [multiple]="false" (selectionChange)="onBookmarkSelect($event)">
+        <mat-list-option *ngFor="let bookmark of bookmarks; let i = index"
+                         [value]="bookmark.name"
+                         (dblclick)="navigateToURL(true, bookmark)">
+          <div class="bookmark-list__item-container">
+            <div class="list-item">
+              <div class="list-item__name">
+                {{ bookmark.name }}
+              </div>
+              <div class="list-item__url"
+                   *ngIf="bookmark.name === selectedBookmarkName"
+                   [title]="bookmark.URL"
+              >
+                {{bookmark.URL}}
+              </div>
+            </div>
+            <button mat-icon-button #menuTrigger="matMenuTrigger"
+                    [matMenuTriggerFor]="menu"
+                    (dblclick)="$event.stopPropagation()">
               <mat-icon>more_vert</mat-icon>
             </button>
           </div>

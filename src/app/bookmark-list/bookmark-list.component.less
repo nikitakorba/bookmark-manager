@@ -6,4 +6,27 @@
   &__container {
     width: 80%;
   }
+
+  &__item-container {
+    display: flex;
+    align-items: center;
+
+    .list-item {
+      width: calc(100% - 40px); // 100% - 40px for menu
+      display: flex;
+
+      &__name {
+        font-weight: bold;
+      }
+
+      &__url {
+        color: rgba(0, 0, 0, 0.54);
+        margin-left: 20px;
+        min-width: 100px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
 }

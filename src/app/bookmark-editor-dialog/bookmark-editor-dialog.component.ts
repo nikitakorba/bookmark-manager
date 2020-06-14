@@ -1,12 +1,13 @@
-import {ChangeDetectionStrategy, Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {BookmarkDialogData} from "../interfaces";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { BookmarkDialogData } from "../interfaces";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 
 @Component({
   selector: 'app-bookmark-editor-dialog',
   templateUrl: 'bookmark-editor-dialog.component.html',
+  styleUrls: ['bookmark-editor-dialog.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
@@ -22,13 +23,10 @@ export class BookmarkEditorDialogComponent implements OnInit {
 
   ngOnInit() {
     this.bookmarkForm = this.formBuilder.group({
-      name: [null, Validators.required],
-      URL: [null, Validators.required],
-      group: [null, Validators.required]
+      name: [this.data?.bookmark.name, Validators.required],
+      URL: [this.data?.bookmark.URL, Validators.required],
+      group: [this.data?.bookmark.group, Validators.required]
     });
-    if (this.data.bookmark) {
-      this.bookmarkForm.patchValue(this.data.bookmark);
-    }
   }
 
   onSave() {

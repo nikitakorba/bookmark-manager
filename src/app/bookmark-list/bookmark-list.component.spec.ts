@@ -1,6 +1,6 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {BookmarkListComponent} from './bookmark-list.component';
+import { BookmarkListComponent } from './bookmark-list.component';
 
 describe('BookmarkListComponent', () => {
   let component: BookmarkListComponent;

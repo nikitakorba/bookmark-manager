@@ -1,10 +1,6 @@
-import {ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Bookmark, BookmarkDialogData} from "../interfaces";
-import {MatDialog} from "@angular/material/dialog";
-import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
-import {take, takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
-import {BookmarkEditorDialogComponent} from "../bookmark-editor-dialog/bookmark-editor-dialog.component";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Bookmark } from "../interfaces";
+import { MatSelectionListChange } from "@angular/material/list";
 
 @Component({
   selector: 'app-bookmark-list',
@@ -12,63 +8,34 @@ import {BookmarkEditorDialogComponent} from "../bookmark-editor-dialog/bookmark-
   styleUrls: ['./bookmark-list.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BookmarkListComponent implements OnInit, OnDestroy {
-  @Input() selectedGroup: string = 'All';
-  @Input() bookmarks: Bookmark[] = [
-    {
-      name: 'Youtube',
-      URL: 'www.youtube.com',
-      group: 'Work',
-    }
-  ];
-  private onDestroySubject: Subject<void> = new Subject<void>();
+export class BookmarkListComponent {
+  @Input() selectedGroup: string;
+  @Input() bookmarks: Bookmark[];
 
-  constructor(private dialog: MatDialog) {
-  }
+  @Output() bookmarkEditEvent: EventEmitter<Bookmark> = new EventEmitter<Bookmark>();
+  @Output() bookmarkDeleteEvent: EventEmitter<Bookmark> = new EventEmitter<Bookmark>();
+  @Output() bookmarkCreateEvent: EventEmitter<void> = new EventEmitter<void>();
 
-  ngOnInit(): void {
-  }
+  public selectedBookmarkName: string;
 
-  navigateToURL(newTab: boolean, {URL}: Bookmark) {
+  public navigateToURL(newTab: boolean, {URL}: Bookmark) {
     const urlToNavigate: string = `//${URL}`;
     newTab ? window.open(urlToNavigate, '_blank') : window.location.href = urlToNavigate;
   }
 
-  editBookmark(bookmark: Bookmark) {
-    const data: BookmarkDialogData = {
-      bookmark,
-    }
-    this.dialog.open(BookmarkEditorDialogComponent, {
-      data,
-    }).afterClosed().pipe(
-      take(1),
-      takeUntil(this.onDestroySubject)
-    ).subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        console.log(confirmed);
-      }
-    });
+  public editBookmark(bookmark: Bookmark) {
+    this.bookmarkEditEvent.emit(bookmark);
   }
 
-  deleteBookmark(bookmark: Bookmark) {
-    const data: BookmarkDialogData = {
-      bookmark,
-    }
-    this.dialog.open(ConfirmationDialogComponent, {
-      data,
-    }).afterClosed().pipe(
-      take(1),
-      takeUntil(this.onDestroySubject)
-    ).subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        console.log(confirmed);
-      }
-    });
+  public deleteBookmark(bookmark: Bookmark) {
+    this.bookmarkDeleteEvent.emit(bookmark);
   }
 
-  ngOnDestroy() {
-    this.onDestroySubject.next();
-    this.onDestroySubject.complete();
+  public createBookmark() {
+    this.bookmarkCreateEvent.emit();
   }
 
+  public onBookmarkSelect({option}: MatSelectionListChange) {
+    this.selectedBookmarkName = option.value;
+  }
 }
