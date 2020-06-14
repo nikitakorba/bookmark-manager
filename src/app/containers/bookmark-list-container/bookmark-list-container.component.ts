@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, of, Subject } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { Bookmark, BookmarkDialogData } from "../../interfaces";
 import { MatSelectionListChange } from "@angular/material/list";
 import { BookmarkEditorDialogComponent } from "../../components/bookmark-editor-dialog/bookmark-editor-dialog.component";

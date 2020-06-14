@@ -9,7 +9,7 @@ export function bookmarkReducer(state: BookmarkState = INITIAL_BOOKMARKS_STATE, 
       return {bookmarks: [...state.bookmarks, action.payload]};
     }
     case BookmarkActionsTypes.EDIT_BOOKMARK: {
-      const foundIndex = state.bookmarks.findIndex((value: Bookmark) => value === action.payload);
+      const foundIndex = state.bookmarks.findIndex(({id}: Bookmark) => id === action.payload.id);
       const bookmarks: Bookmark[] = [...state.bookmarks];
       if (foundIndex >= 0) {
         bookmarks[foundIndex] = action.payload;
@@ -19,8 +19,7 @@ export function bookmarkReducer(state: BookmarkState = INITIAL_BOOKMARKS_STATE, 
       };
     }
     case BookmarkActionsTypes.DELETE_BOOKMARK: {
-      const foundIndex = state.bookmarks.findIndex((value: Bookmark) => value === action.payload);
-      return {bookmarks: state.bookmarks.filter((bookmark, i) => i !== foundIndex)};
+      return {bookmarks: state.bookmarks.filter(({id}: Bookmark) => id !== action.payload.id)};
     }
     case BookmarkActionsTypes.GET_BOOKMARKS:
     default: {
