@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { Observable, of, Subject } from "rxjs";
 import { Bookmark, BookmarkDialogData } from "../../interfaces";
 import { MatSelectionListChange } from "@angular/material/list";
-import { BookmarkEditorDialogComponent } from "../../bookmark-editor-dialog/bookmark-editor-dialog.component";
+import { BookmarkEditorDialogComponent } from "../../components/bookmark-editor-dialog/bookmark-editor-dialog.component";
 import { take, takeUntil } from "rxjs/operators";
-import { ConfirmationDialogComponent } from "../../confirmation-dialog/confirmation-dialog.component";
+import { ConfirmationDialogComponent } from "../../components/confirmation-dialog/confirmation-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 
 @Component({

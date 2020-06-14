@@ -10,14 +10,14 @@ import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from "@angular/material/button";
-import { BookmarkListComponent } from './bookmark-list/bookmark-list.component';
+import { BookmarkListComponent } from './components/bookmark-list/bookmark-list.component';
 import { MatTableModule } from "@angular/material/table";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatCardModule } from "@angular/material/card";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatDialogModule } from "@angular/material/dialog";
-import { ConfirmationDialogComponent } from "./confirmation-dialog/confirmation-dialog.component";
-import { BookmarkEditorDialogComponent } from "./bookmark-editor-dialog/bookmark-editor-dialog.component";
+import { ConfirmationDialogComponent } from "./components/confirmation-dialog/confirmation-dialog.component";
+import { BookmarkEditorDialogComponent } from "./components/bookmark-editor-dialog/bookmark-editor-dialog.component";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { ReactiveFormsModule } from "@angular/forms";

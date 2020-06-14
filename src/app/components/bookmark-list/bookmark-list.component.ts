@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Bookmark } from "../interfaces";
+import { Bookmark } from "../../interfaces";
 import { MatSelectionListChange } from "@angular/material/list";
 
 @Component({
