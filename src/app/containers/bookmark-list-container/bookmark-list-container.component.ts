@@ -8,7 +8,7 @@ import { ConfirmationDialogComponent } from "../../components/confirmation-dialo
 import { MatDialog } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
 import { ALL_GROUP_NAME, selectBookmarks, selectBookmarksGroups } from "../../app.state";
-import { CreateBookmark, DeleteBookmark, EditBookmark } from "../../state";
+import { CreateBookmark, DeleteBookmark, EditBookmark } from "../../state/bookmark";
 
 @Component({
   selector: 'app-bookmark-list-container',
@@ -39,6 +39,7 @@ export class BookmarkListContainerComponent implements OnInit, OnDestroy {
   onBookmarkEdit(bookmark: Bookmark) {
     const data: BookmarkDialogData = {
       bookmark,
+      editMode: true,
     }
     this.dialog.open(BookmarkEditorDialogComponent, {
       data,
@@ -69,7 +70,12 @@ export class BookmarkListContainerComponent implements OnInit, OnDestroy {
   }
 
   onBookmarkCreate() {
-    this.dialog.open(BookmarkEditorDialogComponent)
+    const data: BookmarkDialogData = {
+      editMode: false,
+    }
+    this.dialog.open(BookmarkEditorDialogComponent, {
+      data,
+    })
       .afterClosed().pipe(
       take(1),
       takeUntil(this.onDestroySubject)

@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Bookmark</h1>
+<h1 mat-dialog-title>{{data.editMode ? 'Editing' : 'Creating' }} Bookmark</h1>
 
 <mat-dialog-content [formGroup]="bookmarkForm">
   <mat-form-field>

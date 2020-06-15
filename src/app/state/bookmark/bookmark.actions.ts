@@ -1,4 +1,4 @@
-import { Bookmark } from "../interfaces";
+import { Bookmark } from "../../interfaces";
 import { Action } from "@ngrx/store";
 
 export enum BookmarkActionsTypes {

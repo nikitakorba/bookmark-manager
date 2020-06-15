@@ -1,7 +1,7 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { createSelector } from '@ngrx/store';
 import { ApplicationState, Bookmark } from "./interfaces";
-import { bookmarkReducer, INITIAL_BOOKMARKS_STATE } from "./state";
+import { bookmarkReducer, INITIAL_BOOKMARKS_STATE } from "./state/bookmark";
 
 const getBookmarks = ({bookmarks}: ApplicationState) => bookmarks.bookmarks;
 

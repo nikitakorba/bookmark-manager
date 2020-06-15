@@ -1,5 +1,5 @@
 import { BookmarkActions, BookmarkActionsTypes } from './bookmark.actions'
-import { Bookmark, BookmarkState } from "../interfaces";
+import { Bookmark, BookmarkState } from "../../interfaces";
 import { INITIAL_BOOKMARKS_STATE } from "./bookmark.state";
 
 
@@ -12,7 +12,7 @@ export function bookmarkReducer(state: BookmarkState = INITIAL_BOOKMARKS_STATE, 
       const foundIndex = state.bookmarks.findIndex(({id}: Bookmark) => id === action.payload.id);
       const bookmarks: Bookmark[] = [...state.bookmarks];
       if (foundIndex >= 0) {
-        bookmarks[foundIndex] = action.payload;
+        bookmarks.splice(foundIndex, 1, action.payload)
       }
       return {
         bookmarks,

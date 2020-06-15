@@ -30,10 +30,10 @@ export class BookmarkEditorDialogComponent implements OnInit {
   ngOnInit() {
     this.groups$ = this.store.select(selectBookmarksGroups);
     this.bookmarkForm = this.formBuilder.group({
-      id: [this.data?.bookmark.id || getUniqueID()],
-      name: [this.data?.bookmark.name, Validators.required],
-      URL: [this.data?.bookmark.URL, Validators.required],
-      group: [this.data?.bookmark.group, Validators.required]
+      id: [this.data?.bookmark?.id || getUniqueID()],
+      name: [this.data?.bookmark?.name, Validators.required],
+      URL: [this.data?.bookmark?.URL, Validators.required],
+      group: [this.data?.bookmark?.group, Validators.required]
     });
   }
 

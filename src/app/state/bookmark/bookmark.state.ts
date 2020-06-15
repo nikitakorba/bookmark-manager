@@ -1,4 +1,4 @@
-import { BookmarkState } from "../interfaces";
+import { BookmarkState } from "../../interfaces";
 
 export const INITIAL_BOOKMARKS_STATE: BookmarkState = {
   bookmarks: [
