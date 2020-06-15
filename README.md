@@ -52,7 +52,8 @@ Reducer handles these actions in such way:
 - `EDIT_BOOKMARK` - find the bookmark in state, remove it and replace it by edited one (bookmark can't be directly edited because of immutability principle).
 - `DELETE_BOOKMARK` - find the bookmark and remove it from state.
 
-Also there is one metareducer here:`src/app/state/storage-meta-reducer.ts`. It was created to save state in local storage so that it will persist when you reload the pages. 
+Also there is one metareducer here:`src/app/state/storage-meta-reducer.ts`. It was created to save state in local storage so that application will persist its state
+when you reload the page. 
 
 Two selectors have been created:
 - `selectBookmarksGroups` - gets all groups from existing bookmarks
