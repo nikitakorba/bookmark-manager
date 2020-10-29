@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from "rxjs";
 import { ApplicationState, Bookmark, BookmarkDialogData } from "../../interfaces";
 import { MatSelectionListChange } from "@angular/material/list";
@@ -8,7 +8,7 @@ import { ConfirmationDialogComponent } from "../../components/confirmation-dialo
 import { MatDialog } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
 import { ALL_GROUP_NAME, selectBookmarks, selectBookmarksGroups } from "../../app.state";
-import { CreateBookmark, DeleteBookmark, EditBookmark } from "../../state/bookmark";
+import { BookmarkActions } from '../../state/bookmark/index';
 
 @Component({
   selector: 'app-bookmark-list-container',
@@ -31,7 +31,7 @@ export class BookmarkListContainerComponent implements OnInit, OnDestroy {
     this.bookmarks$ = this.store.select(selectBookmarks());
   }
 
-  onGroupSelect({option}: MatSelectionListChange) {
+  onGroupSelect({ option }: MatSelectionListChange) {
     this.selectedGroup = option.value;
     this.bookmarks$ = this.store.select(selectBookmarks(this.selectedGroup));
   }
@@ -48,7 +48,7 @@ export class BookmarkListContainerComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroySubject)
     ).subscribe((editedBookmark: Bookmark) => {
       if (editedBookmark) {
-        this.store.dispatch(new EditBookmark(editedBookmark));
+        this.store.dispatch(BookmarkActions.editBookmark(editedBookmark));
       }
     });
   }
@@ -64,7 +64,7 @@ export class BookmarkListContainerComponent implements OnInit, OnDestroy {
       takeUntil(this.onDestroySubject)
     ).subscribe((confirmed: boolean) => {
       if (confirmed) {
-        this.store.dispatch(new DeleteBookmark(bookmark));
+        this.store.dispatch(BookmarkActions.deleteBookmark(bookmark));
       }
     });
   }
@@ -77,13 +77,13 @@ export class BookmarkListContainerComponent implements OnInit, OnDestroy {
       data,
     })
       .afterClosed().pipe(
-      take(1),
-      takeUntil(this.onDestroySubject)
-    ).subscribe((bookmark: Bookmark) => {
-      if (bookmark) {
-        this.store.dispatch(new CreateBookmark(bookmark));
-      }
-    });
+        take(1),
+        takeUntil(this.onDestroySubject)
+      ).subscribe((bookmark: Bookmark) => {
+        if (bookmark) {
+          this.store.dispatch(BookmarkActions.createBookmark(bookmark));
+        }
+      });
   }
 
   ngOnDestroy() {
