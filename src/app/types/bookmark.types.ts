@@ -4,3 +4,8 @@ export interface Bookmark {
   URL: string;
   group: string;
 }
+
+export interface BookmarkDialogData {
+  editMode?: boolean;
+  bookmark?: Bookmark;
+}
