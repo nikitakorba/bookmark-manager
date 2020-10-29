@@ -4,7 +4,7 @@ import { BookmarkDialogData } from "../../types";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
-import { selectBookmarksGroups } from "../../app.state";
+import { selectBookmarksGroups } from "../../state/bookmark/bookmark.selectors";
 import { getUniqueID } from "../../helpers/unique-id-generator";
 
 

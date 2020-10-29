@@ -7,8 +7,8 @@ import { take, takeUntil } from "rxjs/operators";
 import { ConfirmationDialogComponent } from "../../components/confirmation-dialog/confirmation-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
-import { ALL_GROUP_NAME, selectBookmarks, selectBookmarksGroups } from "../../app.state";
-import { BookmarkActions } from '../../state/bookmark/index';
+import { BookmarkActions, BookmarkSelectors } from '../../state/bookmark/index';
+
 
 @Component({
   selector: 'app-bookmark-list-container',
@@ -20,20 +20,20 @@ import { BookmarkActions } from '../../state/bookmark/index';
 export class BookmarkListContainerComponent implements OnInit, OnDestroy {
   public groups$: Observable<string[]>;
   public bookmarks$: Observable<Bookmark[]>;
-  public selectedGroup: string = ALL_GROUP_NAME;
+  public selectedGroup: string = BookmarkSelectors.ALL_GROUP_NAME;
   private onDestroySubject: Subject<void> = new Subject<void>();
 
   constructor(private dialog: MatDialog, private store: Store) {
   }
 
   ngOnInit() {
-    this.groups$ = this.store.select(selectBookmarksGroups);
-    this.bookmarks$ = this.store.select(selectBookmarks());
+    this.groups$ = this.store.select(BookmarkSelectors.selectBookmarksGroups);
+    this.bookmarks$ = this.store.select(BookmarkSelectors.selectBookmarks());
   }
 
   onGroupSelect({ option }: MatSelectionListChange) {
     this.selectedGroup = option.value;
-    this.bookmarks$ = this.store.select(selectBookmarks(this.selectedGroup));
+    this.bookmarks$ = this.store.select(BookmarkSelectors.selectBookmarks(this.selectedGroup));
   }
 
   onBookmarkEdit(bookmark: Bookmark) {
