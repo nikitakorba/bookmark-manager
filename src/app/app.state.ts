@@ -1,9 +1,13 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { createSelector } from '@ngrx/store';
-import { ApplicationState, Bookmark } from "./interfaces";
-import { reducer as bookmarkReducer, INITIAL_BOOKMARKS_STATE } from "./state/bookmark";
+import { Bookmark } from './types';
+import { reducer as bookmarkReducer, INITIAL_BOOKMARKS_STATE, BookmarkState } from "./state/bookmark";
 
-const getBookmarks = ({bookmarks}: ApplicationState) => bookmarks.bookmarks;
+export interface ApplicationState {
+  bookmarks: BookmarkState.State;
+}
+
+const getBookmarks = ({ bookmarks }: ApplicationState) => bookmarks.bookmarks;
 
 export const ALL_GROUP_NAME = 'All';
 

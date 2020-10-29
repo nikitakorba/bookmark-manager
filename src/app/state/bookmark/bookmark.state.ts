@@ -1,6 +1,10 @@
-import { BookmarkState } from "../../interfaces";
+import { Bookmark } from '../../types'
 
-export const INITIAL_BOOKMARKS_STATE: BookmarkState = {
+export type State = {
+  bookmarks?: Bookmark[];
+}
+
+export const INITIAL_BOOKMARKS_STATE: State = {
   bookmarks: [
     {id: '1', name: 'Google', URL: 'www.google.com', group: 'Work'},
     {id: '2', name: 'Youtube', URL: 'www.youtube.com', group: 'Leisure'},

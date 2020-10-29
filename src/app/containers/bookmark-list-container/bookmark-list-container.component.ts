@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject } from "rxjs";
-import { ApplicationState, Bookmark, BookmarkDialogData } from "../../interfaces";
+import { Bookmark, BookmarkDialogData } from "../../types";
 import { MatSelectionListChange } from "@angular/material/list";
 import { BookmarkEditorDialogComponent } from "../../components/bookmark-editor-dialog/bookmark-editor-dialog.component";
 import { take, takeUntil } from "rxjs/operators";
@@ -23,7 +23,7 @@ export class BookmarkListContainerComponent implements OnInit, OnDestroy {
   public selectedGroup: string = ALL_GROUP_NAME;
   private onDestroySubject: Subject<void> = new Subject<void>();
 
-  constructor(private dialog: MatDialog, private store: Store<ApplicationState>) {
+  constructor(private dialog: MatDialog, private store: Store) {
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { ApplicationState, BookmarkDialogData } from "../../interfaces";
+import { BookmarkDialogData } from "../../types";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
@@ -23,7 +23,7 @@ export class BookmarkEditorDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: BookmarkDialogData,
     private dialogRef: MatDialogRef<BookmarkEditorDialogComponent>,
     private formBuilder: FormBuilder,
-    private store: Store<ApplicationState>,
+    private store: Store,
   ) {
   }
 

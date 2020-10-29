@@ -1,5 +1,6 @@
 import * as BookmarkActions from './bookmark.actions'
-import { Bookmark, BookmarkState } from "../../interfaces";
+import { Bookmark } from "../../types";
+import * as BookmarkState from './bookmark.state'
 import { INITIAL_BOOKMARKS_STATE } from "./bookmark.state";
 import { Action, createReducer, on } from '@ngrx/store';
 
@@ -26,6 +27,6 @@ const bookmarkReducer = createReducer(
   }),
 );
 
-export function reducer(state: BookmarkState | undefined, action: Action) {
+export function reducer(state: BookmarkState.State, action: Action) {
   return bookmarkReducer(state, action);
 }
