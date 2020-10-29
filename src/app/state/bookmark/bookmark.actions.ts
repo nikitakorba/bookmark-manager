@@ -1,5 +1,5 @@
 import { Bookmark } from "../../interfaces";
-import { Action } from "@ngrx/store";
+import { Action, createAction, props } from "@ngrx/store";
 
 export enum BookmarkActionsTypes {
   CREATE_BOOKMARK = '[Bookmark] Create a Bookmark',
@@ -8,30 +8,7 @@ export enum BookmarkActionsTypes {
   DELETE_BOOKMARK = '[Bookmark] Delete a Bookmark',
 }
 
-export class CreateBookmark implements Action {
-  readonly type = BookmarkActionsTypes.CREATE_BOOKMARK;
-
-  constructor(public payload: Bookmark) {
-  }
-}
-
-export class GetBookmarks implements Action {
-  readonly type = BookmarkActionsTypes.GET_BOOKMARKS;
-}
-
-
-export class EditBookmark implements Action {
-  readonly type = BookmarkActionsTypes.EDIT_BOOKMARK;
-
-  constructor(public payload: Bookmark) {
-  }
-}
-
-export class DeleteBookmark implements Action {
-  readonly type = BookmarkActionsTypes.DELETE_BOOKMARK;
-
-  constructor(public payload: Bookmark) {
-  }
-}
-
-export type BookmarkActions = GetBookmarks | CreateBookmark | DeleteBookmark | EditBookmark;
+export const createBookmark = createAction(BookmarkActionsTypes.CREATE_BOOKMARK, props<Bookmark>());
+export const getBookmarks = createAction(BookmarkActionsTypes.GET_BOOKMARKS);
+export const editBookmark = createAction(BookmarkActionsTypes.EDIT_BOOKMARK, props<Bookmark>());
+export const deleteBookmark = createAction(BookmarkActionsTypes.DELETE_BOOKMARK, props<Bookmark>());
